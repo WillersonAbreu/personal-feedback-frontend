@@ -20,6 +20,16 @@ export const Content = styled.div`
   margin: 0 auto;
   border: 0.5px solid #30cb7e;
   border-radius: 5px;
+
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: row;
+    width: 95vw;
+    height: 70%;
+    margin: 0 auto;
+    border: 0.5px solid #30cb7e;
+    border-radius: 5px;
+  }
 `;
 
 export const FormsWrapper = styled.div`
@@ -46,6 +56,20 @@ export const OrDiv = styled.div`
   margin: 12vh -4.6vh;
   font-family: 'Bungee Inline', cursive;
   text-align: center;
+
+  @media (max-width: 800px) {
+    width: 15vw;
+    height: 15vw;
+    background-color: white;
+    border: 4px solid #30cb7e;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    margin: 12vh 0 0 -4.5vh;
+    font-family: 'Bungee Inline', cursive;
+    text-align: center;
+  }
 `;
 
 export const StyledForm = styled(Form)`

@@ -16,6 +16,7 @@ import CustomLayout from '~/components/CustomLayout/CustomLayout';
 
 // Helpers
 import { checkAuth } from '~/helpers/AuthHelper';
+import Main from '~/pages/Main/Main';
 
 // Exporting route service
 export default function Routes() {
@@ -33,11 +34,7 @@ export default function Routes() {
       <Switch>
         <CustomLayout>
           <Route exact path="/" component={Home} />
-          <PrivateRoute
-            isSigned={isSigned}
-            path="/main"
-            component={() => <h1>Main</h1>}
-          />
+          <PrivateRoute isSigned={isSigned} path="/main" component={Main} />
         </CustomLayout>
       </Switch>
     </Router>

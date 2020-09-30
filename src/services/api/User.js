@@ -2,12 +2,9 @@ import axios from 'axios';
 import AxiosConfig from './config/AxiosConfig';
 
 export default class UserService {
-  static async getProfileImage(userId) {
+  static async getAll() {
     try {
-      const response = await axios.get(
-        `/profile-image/${userId}`,
-        AxiosConfig.config
-      );
+      const response = await axios.get('/users', AxiosConfig.config);
       return response.data;
     } catch (error) {
       return error;
