@@ -4,7 +4,7 @@ import React from 'react';
 import { Container, ChildContainer } from './CustomLayoutStyles';
 
 // Header import
-import Header, { LogoWrapper, RightContainer } from '../Header/HeaderStyles';
+import Header, { LogoWrapper } from '../Header/HeaderStyles';
 
 export default function CustomLayout(props) {
   return (
