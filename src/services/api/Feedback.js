@@ -35,10 +35,10 @@ export default class FeedbackService {
     }
   }
 
-  static async update(data) {
+  static async update(postId, data) {
     try {
       const response = await axios.put(
-        `/feedbacks/${data}`,
+        `/feedbacks/${postId}`,
         data,
         AxiosConfig.config
       );

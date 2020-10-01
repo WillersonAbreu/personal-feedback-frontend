@@ -78,7 +78,7 @@ function EditFeedback({
         abortEarly: false,
       });
 
-      await FeedbackService.update(data);
+      await FeedbackService.update(selectedFeedbackToEdit.id, data);
       await getCreatedFeedbacks();
       handleClose();
       message.success('Feedback updated successfully');
