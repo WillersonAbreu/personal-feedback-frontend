@@ -37,16 +37,23 @@ export default class FeedbackService {
 
   static async update(data) {
     try {
-      const response = await axios.put('/feedbacks', data, AxiosConfig.config);
+      const response = await axios.put(
+        `/feedbacks/${data}`,
+        data,
+        AxiosConfig.config
+      );
       return response.data;
     } catch (error) {
       return error;
     }
   }
 
-  static async delete() {
+  static async delete(data) {
     try {
-      const response = await axios.delete('/feedbacks', AxiosConfig.config);
+      const response = await axios.delete(
+        `/feedbacks/${data}`,
+        AxiosConfig.config
+      );
       return response.data;
     } catch (error) {
       return error;

@@ -16,13 +16,22 @@ import {
   StyledCreateButton,
   StyledInputLabel,
   SelectWrapper,
-} from './CreateFeedbackStyles';
+  ButtonsWrapper,
+  StyledDeleteButton,
+} from './EditFeedbackStyles';
+
 import Select from '~/components/Unform/Select/Select';
 import UserService from '~/services/api/User';
 import { useSelector } from 'react-redux';
 import FeedbackService from '~/services/api/Feedback';
 
-function CreateFeedback({ title, visible, getCreatedFeedbacks, handleClose }) {
+function EditFeedback({
+  title,
+  visible,
+  getCreatedFeedbacks,
+  selectedFeedbackToEdit,
+  handleClose,
+}) {
   const [users, setUsers] = useState([]);
   const loggedUserId = useSelector(({ user }) => user.id);
   const formRef = useRef(null);
@@ -47,29 +56,19 @@ function CreateFeedback({ title, visible, getCreatedFeedbacks, handleClose }) {
     getUsers();
   }, [loggedUserId, getUsers]);
 
-  async function handleSubmit(data, { reset }) {
+  async function handleSubmit(data) {
     try {
       // Remove all previous errors
       formRef.current.setErrors({});
 
       // Schema to validate the form
       const schema = Yup.object({
-        points_to_improve: Yup.string().required(
-          'Is necessary insert the points to improve'
-        ),
-        points_to_keep: Yup.string().required(
-          'Is necessary insert the points to keep'
-        ),
-        suggestions: Yup.string().required('Is necessary insert suggestions'),
-        final_feedback: Yup.string().required(
-          'Is necessary insert the final feedback'
-        ),
-        user_creator_id: Yup.number().required(
-          'Is necessary insert the creator'
-        ),
-        user_receiver_id: Yup.number().required(
-          'Is necessary select the receiver user'
-        ),
+        points_to_improve: Yup.string(),
+        points_to_keep: Yup.string(),
+        suggestions: Yup.string(),
+        final_feedback: Yup.string(),
+        user_creator_id: Yup.number(),
+        user_receiver_id: Yup.number(),
       });
 
       data.user_creator_id = Number(loggedUserId);
@@ -79,10 +78,10 @@ function CreateFeedback({ title, visible, getCreatedFeedbacks, handleClose }) {
         abortEarly: false,
       });
 
-      await FeedbackService.create(data);
+      await FeedbackService.update(data);
       await getCreatedFeedbacks();
-      reset();
-      message.success('Feedback created successfully');
+      handleClose();
+      message.success('Feedback updated successfully');
     } catch (error) {
       // Showing validation errors on
       const validationErrors = {};
@@ -92,10 +91,41 @@ function CreateFeedback({ title, visible, getCreatedFeedbacks, handleClose }) {
         });
         formRef.current.setErrors(validationErrors);
       } else {
-        message.error(error.message); //'Failed when trying to login!');
+        message.error(error.message);
       }
     }
   }
+
+  async function handleDelete(feedbackId) {
+    try {
+      await FeedbackService.delete(feedbackId);
+      handleClose();
+      getCreatedFeedbacks();
+    } catch (error) {
+      message.error(error.message);
+    }
+  }
+
+  const initialData = {
+    user_creator_id: selectedFeedbackToEdit.creator
+      ? selectedFeedbackToEdit.creator.id
+      : '',
+    user_receiver_id: selectedFeedbackToEdit.creator
+      ? selectedFeedbackToEdit.receiver.id
+      : '',
+    points_to_improve: selectedFeedbackToEdit.creator
+      ? selectedFeedbackToEdit.points_to_improve
+      : '',
+    points_to_keep: selectedFeedbackToEdit.creator
+      ? selectedFeedbackToEdit.points_to_keep
+      : '',
+    suggestions: selectedFeedbackToEdit.creator
+      ? selectedFeedbackToEdit.suggestions
+      : '',
+    final_feedback: selectedFeedbackToEdit.creator
+      ? selectedFeedbackToEdit.final_feedback
+      : '',
+  };
 
   return (
     <>
@@ -105,7 +135,7 @@ function CreateFeedback({ title, visible, getCreatedFeedbacks, handleClose }) {
         footer={null}
         onCancel={handleClose}
       >
-        <Form ref={formRef} onSubmit={handleSubmit}>
+        <Form initialData={initialData} ref={formRef} onSubmit={handleSubmit}>
           <SelectWrapper>
             <StyledInputLabel>Send to</StyledInputLabel>
             <Select name="user_receiver_id" options={users}>
@@ -128,16 +158,18 @@ function CreateFeedback({ title, visible, getCreatedFeedbacks, handleClose }) {
             <StyledInputLabel>Final feedback</StyledInputLabel>
             <TextArea name="final_feedback" />
           </SelectWrapper>
-          <StyledCreateButton
-            style={{ display: 'flex', margin: '0 auto' }}
-            type="submit"
-          >
-            Send
-          </StyledCreateButton>
+          <ButtonsWrapper>
+            <StyledCreateButton type="submit">Update</StyledCreateButton>
+            <StyledDeleteButton
+              onClick={() => handleDelete(selectedFeedbackToEdit.id)}
+            >
+              Delete
+            </StyledDeleteButton>
+          </ButtonsWrapper>
         </Form>
       </Modal>
     </>
   );
 }
 
-export default CreateFeedback;
+export default EditFeedback;

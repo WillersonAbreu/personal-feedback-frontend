@@ -2,7 +2,10 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getFeedbackDay } from '~/helpers/DateFormatterHelper';
 import FeedbackService from '~/services/api/Feedback';
+
+// Modals
 import CreateFeedback from './components/CreateFeedback/CreateFeedback';
+import EditFeedback from './components/EditFeedback/EditFeedback';
 import ReadFeedback from './components/ReadFeedback/ReadFeedback';
 
 import {
@@ -21,9 +24,11 @@ import {
 function Main() {
   const [createModalState, setCreateModalState] = useState(false);
   const [readModalState, setReadModalState] = useState(false);
+  const [editModalState, setEditModalState] = useState(false);
   const [createdFeedbacks, setCreatedFeedbacks] = useState([]);
   const [receivedFeedbacks, setReceivedFeedbacks] = useState([]);
   const [selectedFeedbackToRead, setSelectedFeedbackToRead] = useState({});
+  const [selectedFeedbackToEdit, setSelectedFeedbackToEdit] = useState({});
   const loggedUserId = useSelector(({ user }) => user.id);
 
   useEffect(() => {
@@ -54,6 +59,11 @@ function Main() {
     setReadModalState(true);
   };
 
+  const openEditModal = (feedbackData) => {
+    setSelectedFeedbackToEdit(feedbackData);
+    setEditModalState(true);
+  };
+
   return (
     <Container>
       <NewFeedbackButton onClick={() => setCreateModalState(true)}>
@@ -68,7 +78,7 @@ function Main() {
               return (
                 <FeedbackItem
                   key={feedback.id}
-                  // onClick={}
+                  onClick={() => openEditModal(feedback)}
                 >
                   <ItemTopSection>
                     <From>{`De: ${feedback.creator.name}`}</From>
@@ -109,12 +119,13 @@ function Main() {
         handleClose={() => setCreateModalState(false)}
       />
 
-      {/* <UpdateCreatedFeedback
+      <EditFeedback
         title="Update Feedback"
-        visible={createModalState}
+        visible={editModalState}
+        selectedFeedbackToEdit={selectedFeedbackToEdit}
         getCreatedFeedbacks={getCreatedFeedbacks}
-        handleClose={() => setCreateModalState(false)}
-      /> */}
+        handleClose={() => setEditModalState(false)}
+      />
 
       <ReadFeedback
         title="Read Feedback"
