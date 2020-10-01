@@ -3,6 +3,12 @@ import styled from 'styled-components';
 export const SelectWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
+  .error {
+    margin: 0 auto 2vh auto;
+    color: red;
+    font-size: 1.2em;
+  }
 `;
 
 export const StyledInputLabel = styled.label`

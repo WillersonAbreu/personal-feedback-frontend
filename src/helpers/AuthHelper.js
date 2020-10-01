@@ -27,10 +27,13 @@ export const checkAuth = () => {
   try {
     AxiosConfig.config.headers.Authorization = `Bearer ${token}`;
     jwt.verify(token, JWT_SECRET);
-    const { id, name, email, birthdate, user_type } = jwt.decode(token);
-    store.dispatch(UserActions.saveUser(id, name, email, birthdate, user_type));
+    const { id, name, email } = jwt.decode(token);
+
+    store.dispatch(AuthActions.authSuccess(token));
+    store.dispatch(UserActions.saveUser(id, name, email));
     return true;
   } catch (error) {
+    console.log(error);
     store.dispatch(AuthActions.authFail());
     localStorage.removeItem('token');
     return false;

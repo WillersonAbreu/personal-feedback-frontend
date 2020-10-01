@@ -46,11 +46,12 @@ export const FeedbackList = styled.div`
   border: 0.5px solid #30cb7e;
   border-radius: 5px;
   margin: 0 auto;
+  overflow: auto;
 `;
 
 export const FeedbackItem = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: 60px;
   width: 90%;
   border: 0.5px solid #30cb7e;
@@ -61,6 +62,11 @@ export const FeedbackItem = styled.div`
     cursor: pointer;
     opacity: 0.5;
   }
+`;
+
+export const From = styled.span`
+  display: flex;
+  font-weight: 500;
 `;
 
 export const NewFeedbackButton = styled.button`
@@ -78,4 +84,9 @@ export const NewFeedbackButton = styled.button`
     cursor: pointer;
     opacity: 0.5;
   }
+`;
+
+export const ItemTopSection = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

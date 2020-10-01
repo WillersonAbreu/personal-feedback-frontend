@@ -1,7 +1,7 @@
 import { createActions, createReducer } from 'reduxsauce';
 
 export const { Creators, Types } = createActions({
-  saveUser: ['id', 'name', 'email', 'birthdate', 'user_type'],
+  saveUser: ['id', 'name', 'email'],
   clearUser: [],
 });
 
@@ -9,8 +9,6 @@ const INITIAL_STATE = {
   id: '',
   name: '',
   email: '',
-  birthdate: '',
-  user_type: '',
 };
 
 const saveUser = (state = INITIAL_STATE, action) => ({
@@ -27,8 +25,6 @@ const clearUser = (state = INITIAL_STATE, action) => ({
   id: '',
   name: '',
   email: '',
-  birthdate: '',
-  user_type: '',
 });
 
 export default createReducer(INITIAL_STATE, {

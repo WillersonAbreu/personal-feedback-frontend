@@ -88,6 +88,12 @@ export const StyledForm = styled(Form)`
     font-family: 'Bungee Inline', cursive;
     margin: 0 auto;
   }
+
+  .error {
+    margin: -3vh auto 2vh auto;
+    color: red;
+    font-size: 1.2em;
+  }
 `;
 
 export const StyledButton = styled.button`

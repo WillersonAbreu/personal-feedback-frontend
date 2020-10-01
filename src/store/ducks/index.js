@@ -2,13 +2,11 @@ import { combineReducers } from 'redux';
 
 // Reducers
 import auth from './Auth';
-// import user from './User';
-// import search from './Search';
-// import global from './Global';
+import user from './User';
 
 const reducers = combineReducers({
   auth,
-  // user, search, global
+  user,
 });
 
 export default reducers;
