@@ -15,14 +15,20 @@ O projeto é uma aplicação simples para poder registrar feedbacks para outros 
 
 - [NodeJs + npm](https://nodejs.org/en/)
 
+Abra o diretório onde você deseja manter o projeto pelo terminal e execute o seguinte comando:
+
+```sh
+$ git clone git@github.com:WillersonAbreu/personal-feedback-frontent.git
+```
+
 ```sh
 $ cd personal-feedback-frontend
 ```
 
 - Copie o conteúdo do arquivo config.js.example que fica dentro de /src/global/shared;
-
 - Crie um novo arquivo chamado config.js dentro do mesmo diretório;
 - Cole o conteúdo copiado do primeiro arquivo dentro deste novo arquivo;
+- Preencha _GLOBAL_URL_ com as string da URL + Porta onde está rodando a API Rest. Exemplo: http://localhost:3333
 
 Para instalar as dependências:
 
