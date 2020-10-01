@@ -13,6 +13,7 @@ O projeto é uma aplicação simples para poder registrar feedbacks para outros 
 
 ##### Pré requisitos:
 
+- [API Rest da aplicação (Backend)](https://github.com/WillersonAbreu/personal-feedback-api)
 - [NodeJs + npm](https://nodejs.org/en/)
 
 Abra o diretório onde você deseja manter o projeto pelo terminal e execute o seguinte comando:
@@ -29,6 +30,7 @@ $ cd personal-feedback-frontend
 - Crie um novo arquivo chamado config.js dentro do mesmo diretório;
 - Cole o conteúdo copiado do primeiro arquivo dentro deste novo arquivo;
 - Preencha _GLOBAL_URL_ com as string da URL + Porta onde está rodando a API Rest. Exemplo: http://localhost:3333
+- Preencha _JWT_SECRET_ com a mesma string que está sendo utilizada no arquivo .env da API Rest
 
 Para instalar as dependências:
 
