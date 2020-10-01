@@ -31,11 +31,23 @@ export const LogoWrapper = styled.div`
 export const RightContainer = styled.div`
   margin: 1vh auto;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: absolute;
   right: 5vw;
   border-radius: 5px;
   width: 12vh;
   height: 10vh;
+
+  h3 {
+    font-weight: 700;
+
+    &:hover {
+      cursor: pointer;
+      transition: all 0.5s;
+      color: white;
+    }
+  }
 `;
 
 export default StyledHeader;
