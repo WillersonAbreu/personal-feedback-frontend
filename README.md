@@ -18,7 +18,7 @@ O projeto é uma aplicação simples para poder registrar feedbacks para outros 
 Abra o diretório onde você deseja manter o projeto pelo terminal e execute o seguinte comando:
 
 ```sh
-$ git clone git@github.com:WillersonAbreu/personal-feedback-frontent.git
+$ git clone git@github.com:WillersonAbreu/personal-feedback-frontend.git
 ```
 
 ```sh
